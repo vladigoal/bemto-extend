@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/vladigoal/bemto-extend/issues"
   },
-  "homepage": "https://github.com/vladigoal/bemto-extend"
+  "homepage": "https://github.com/vladigoal/bemto-extend",
+  "dependencies": {}
 }
