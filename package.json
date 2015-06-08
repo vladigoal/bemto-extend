@@ -16,5 +16,7 @@
     "url": "https://github.com/vladigoal/bemto-extend/issues"
   },
   "homepage": "https://github.com/vladigoal/bemto-extend",
-  "dependencies": {}
+  "dependencies": {
+    "through2": "0.6.3"
+  }
 }

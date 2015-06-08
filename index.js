@@ -1,8 +1,7 @@
+//from gulp-replace 
 'use strict';
 
 var through = require('through2');
-var rs = require('replacestream');
-var istextorbinary = require('istextorbinary');
 
 module.exports = function() {
   var doReplace = function(file, enc, callback) {
