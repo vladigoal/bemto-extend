@@ -1,20 +1,22 @@
 {
-  "name": "bemto-extend",
+  "name": "doc-data-parser",
   "version": "1.0.0",
-  "description": "Bemto extend for +i",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vladigoal/bemto-extend.git"
+    "url": "https://github.com/vladigoal/doc-data-parser.git"
   },
   "author": "Gorbyk Vlad",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vladigoal/bemto-extend/issues"
+    "url": "https://github.com/vladigoal/doc-data-parser/issues"
   },
-  "homepage": "https://github.com/vladigoal/bemto-extend",
-  "dependencies": {}
+  "homepage": "https://github.com/vladigoal/doc-data-parser",
+  "dependencies": {
+    "through2": "0.6.3"
+  }
 }

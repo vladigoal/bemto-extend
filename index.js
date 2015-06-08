@@ -1,8 +1,6 @@
 'use strict';
 
 var through = require('through2');
-var rs = require('replacestream');
-var istextorbinary = require('istextorbinary');
 
 module.exports = function() {
   var doReplace = function(file, enc, callback) {
@@ -15,8 +13,6 @@ module.exports = function() {
       if (file.isBuffer()) {
           var chunks = String(file.contents).split(': +i');
           var result = '';
-
-          // result = chunks.join('\n' + blockSpaces + '    +te(' + blockName + ')');
 
         for (var i = 0; i < chunks.length; i++){
             if(i < chunks.length - 1){
