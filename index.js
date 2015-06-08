@@ -1,33 +1,41 @@
 'use strict';
 
-var through = require('through2');
+var through = require('through2'),
+    fs = require('fs');
 
 module.exports = function() {
   var doReplace = function(file, enc, callback) {
-    if (file.isNull()) {
+    var jadeVars = '';
+    var dataDir = __dirname.split('node_modules')[0] + 'src/templates/data';
+    
+    if (file.isNull()){
       return callback(null, file);
+    }
+
+    function rFile(filesList, num){ //read file data
+      if(num < filesList.length - 1){
+        fs.readFile(dataDir + '/' + filesList[num], 'utf8', function (err, data) {
+          // if (err) throw err;
+          data = data.replace(/\r?\n|\r/g, '');
+          jadeVars += '- ' + filesList[num].split('.')[0] + ' = ' + data + '\n';
+          rFile(filesList, num  + 1);
+        });
+      }else{
+        // var str = '- footerMenu = [{"title": "Сервис", "partners": true, "children": [{"title": "О нас", "url": "/about.html"}, {"title": "О рейтинге", "url": "/about-rating.html" }, { "title": "Новости", "url": "/articles.html" }, { "title": "Правила сервиса", "url": "/rules.html" } ] }]'
+        file.contents = new Buffer(jadeVars + '\n' + file.contents);
+        return callback(null, file);
+      }
+    }
+
+    function rDir(err, filesList){ //read data dir
+      rFile(filesList, 0)
     }
 
     function doReplace() {
 
       if (file.isBuffer()) {
-          var chunks = String(file.contents).split(': +i');
           var result = '';
-
-        for (var i = 0; i < chunks.length; i++){
-            if(i < chunks.length - 1){
-                var block = chunks[i].split('\n')[chunks[i].split('\n').length - 1]
-                var blockSpaces = block.split('+b')[0]
-                var blockName = block.split('.')[1]
-                result += chunks[i] + '\n' + blockSpaces + '    +i';
-            }else{
-                result += chunks[i];
-            }
-        }
-
-          file.contents = new Buffer(result);
-
-        return callback(null, file);
+        return fs.readdir(dataDir, rDir)
       }
 
       callback(null, file);
